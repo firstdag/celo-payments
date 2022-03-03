@@ -127,6 +127,9 @@ export class Charge {
       this.retries
     );
 
+    console.log('elhay response ----')
+    console.log(response)
+
     const jsonResponse = await response.json();
 
     if (this.useAuthentication) {
@@ -201,6 +204,7 @@ export class Charge {
       }
       return Ok(result);
     } catch (e) {
+      console.log('elhay error ----')
       return Err(e);
     }
   }
@@ -222,6 +226,12 @@ export class Charge {
     requestTypeDefinition: EIP712TypeDefinition,
     responseTypeDefinition: EIP712TypeDefinition
   ) {
+    console.log('elhay')
+    console.log(params)
+    if ((params as InitChargeRequest).params?.sender?.payerData) {
+      console.log((params as InitChargeRequest).params.sender.payerData)
+
+    }
     const response = await this.request(
       params,
       requestTypeDefinition,
